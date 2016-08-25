@@ -1,0 +1,19 @@
+{
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Glenn Eggleton",
+      "email": "geggleto@gmail.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "6.2.1",
+    "nesbot/carbon": "^1.21",
+    "vlucas/phpdotenv": "^2.3"
+  },
+  "autoload" : {
+    "psr-4" : {
+      "Upload\\" : "src"
+    }
+  }
+}
