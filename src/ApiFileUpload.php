@@ -63,15 +63,26 @@ class ApiFileUpload
     /**
      * @param string $file
      * @param string $objectName
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * 
+     * @return Request
      */
-    public function uploadFileNow($file = '', $objectName = '') {
+    public function makeRequest($file = '', $objectName = '') {
         $headers = [
             'Content-Type' => \mime_content_type($file),
             'X-Auth-Token' => $this->token
         ];
         $fh = fopen($file, "r");
-        $request = new Request('PUT', $this->endPointUri."/".$this->container."/".$objectName, $headers, $fh);
+
+        return  new Request('PUT', $this->endPointUri."/".$this->container."/".$objectName, $headers, $fh);
+    }
+
+    /**
+     * @param string $file
+     * @param string $objectName
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function uploadFileNow($file = '', $objectName = '') {
+        $request = $this->makeRequest($file, $objectName);
 
         return $this->client->send($request);
     }
